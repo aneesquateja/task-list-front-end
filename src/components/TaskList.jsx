@@ -5,19 +5,18 @@ import React from 'react';
 
 const TaskList = ({ tasks, onToggleComplete, onDelete }) => {
   const getTaskListJSX = (tasks) => {
-    return tasks.map((task) => {
-      return (
-        <Task
-          key={task.id}
-          id={task.id}
-          title={task.title}
-          isComplete={task.isComplete}
-          onToggleComplete={onToggleComplete} // Pass toggle function to Task
-          onDelete={onDelete} //pass the delete function to Task
-        />
-      );
-    });
+    return tasks.map((task) => (
+      <Task
+        key={task.id}
+        id={task.id}
+        title={task.title}
+        isComplete={task.isComplete}
+        onToggleComplete={onToggleComplete}
+        onDelete={onDelete}
+      />
+    ));
   };
+
   return <ul className="tasks__list no-bullet">{getTaskListJSX(tasks)}</ul>;
 };
 
@@ -30,7 +29,7 @@ TaskList.propTypes = {
     })
   ).isRequired,
   onToggleComplete: PropTypes.func.isRequired,
-  onDelete:PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
 
 export default TaskList;

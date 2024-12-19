@@ -1,13 +1,9 @@
-import { useState } from 'react';
 import PropTypes from 'prop-types';
 import React from 'react';
 import './Task.css';
-import './TaskList';
 
 const Task = ({ id, title, isComplete, onToggleComplete, onDelete }) => {
-  // const [complete, setComplete] = useState(isComplete);
   const buttonClass = isComplete ? 'tasks__item__toggle--completed' : '';
-
 
   return (
     <li className="tasks__item">
@@ -29,7 +25,6 @@ const Task = ({ id, title, isComplete, onToggleComplete, onDelete }) => {
   );
 };
 
-// Define the expected prop types for better validation
 Task.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
@@ -39,4 +34,3 @@ Task.propTypes = {
 };
 
 export default Task;
-
