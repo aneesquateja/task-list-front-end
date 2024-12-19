@@ -11,7 +11,8 @@ const convertFromApi = (apiTask) => {
     ...apiTask,
     id: apiTask.id,
     title: apiTask.title,
-    isComplete: apiTask.completed_at !== null,
+    // isComplete: apiTask.completed_at !== null,
+    isComplete: apiTask.completed_at ? true : false, // Treat completed_at presence as true/false
   };
   return newTask;
 };
