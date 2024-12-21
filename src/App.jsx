@@ -2,6 +2,8 @@ import TaskList from './components/TaskList.jsx';
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import NewTaskForm from './components/NewTaskForm.jsx';
+
 
 const kbaseURL = 'http://127.0.0.1:5000/tasks'; // I can Replace with your deployed API URL if needed
 
@@ -77,12 +79,33 @@ function App() {
       });
   };
 
+  const handleSubmit = (task) => {
+    console.log('Submitting task:', task); // Log the task object
+    axios.post(`${kbaseURL}`, task)
+      .then((result) => {
+        console.log('Post result:', result); // Log the result
+        setTasks((prevTasks) => [convertFromApi(result.data.task), ...prevTasks]);
+      }).catch((error) => {
+        console.error('Error posting task:', error); // Log the error
+        if (error.response) {
+          console.error('Response data:', error.response.data); // Log the response data
+          console.error('Response status:', error.response.status); // Log the response status
+          console.error('Response headers:', error.response.headers); // Log the response headers
+        }
+      });
+  };
+
   return (
     <div className="App">
       <header className="App-header">
         <h1>Ada&apos;s Task List</h1>
       </header>
       <main>
+        <br/>
+        <div>
+          <NewTaskForm handleSubmit={handleSubmit}/>
+        </div>
+        <br/>
         <div>
           <TaskList
             tasks={tasks}
